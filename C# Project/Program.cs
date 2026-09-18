@@ -1,6 +1,15 @@
-﻿//2.1 კალკულატორი
-//კალკულატორის ფუნქცია მომხმარებლებს საშუალებას აძლევს შეასრულონ ძირითადი 
-//არითმეტიკული მოქმედებები (+, -, *, /). მომხმარებლებს შეუძლიათ შეიყვანონ ორი რიცხვი და 
-//შემდეგ აირჩიონ ოპერაცია შედეგის მისაღებად. კალკულატორი ასევე შეიცავს შეყვანის 
-//ვალიდაციას არასწორი შეყვანების დასამუშავებლად. 
+﻿using C__Project.Models;
+
+Console.WriteLine("Airchiet programa:");
+Console.WriteLine("1 - Calculator");
+string choice  = Console.ReadLine();
+Console.Clear();
+switch (choice)
+{
+    case "1": Calculator.RunCalc();
+        return;
+}
+
+
+
 

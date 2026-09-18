@@ -7,103 +7,110 @@
 using System.Diagnostics;
 using System.Xml;
 
-namespace C__Project.Models
+namespace C__Project.Models;
+
+public class Calculator
 {
-    public class Calculator
+    
+    public static void RunCalc()
     {
-        //არითმეტიკული მოქმედებების ფუნქცია.
-        static double calcFunct(double num1, double num2, string operation)
+        bool calcOnOF = true;
+
+
+        while(calcOnOF)
         {
-            switch (operation)
+            Console.WriteLine("CALCULATOR");
+            Console.WriteLine("-------------------------------");
+
+            Console.WriteLine("Sheiyvanet pirveli ricxvi:");
+
+            double num1;
+            while(!double.TryParse(Console.ReadLine(), out num1))
             {
-                case "+":
-                    return num1 + num2;
+                Console.WriteLine("Sheiyvanet pirveli ricxvi!");
+            }
+         
 
-                case "-":
-                    return num1 - num2;
-
-                case "*":
-                    return num1 * num2;
-
-                case "/":
-                    //ვამოწმებთ ნულზე გაყოფას.
-
-                    if (num2 == 0)
-                    {
-                        throw new DivideByZeroException("Nulze gayofa ar sheidzleba!");
-                    }
-                    else
-                    {
-                        return num1 / num2;
-                    }
-                default:
-                    throw new ArgumentException("Moxda shecdoma!");
-
+            Console.WriteLine("Sheiyvanet meore ricxvi:");
+            double num2;
+            while (!double.TryParse(Console.ReadLine(), out num2))
+            {
+                Console.WriteLine("Sheiyvanet meore ricxvi!");
             }
 
-        }
 
-            //რიცხვის შემოყვანა მომხმარებლისგან.
-            //While ციკლი.
-
-            static void Main(string[] args)
+            try
             {
-                bool countineOperation = true; // სანამ ეს true იქნება ციკლი არ დამთავრდება.
-
-                while (countineOperation)
+                Console.WriteLine("Chaweret Pirobiti operatori: (+, -, *, /)");
+                string action = Console.ReadLine();
+                if (action != "+" && action != "-" && action != "*" && action != "/")
                 {
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("sheiyvanet pirveli ricxvi: ");
-                    string inp1 = Console.ReadLine();
-              
-                    Console.WriteLine("Sheiyvanet meore ricxvi: ");
-                    string inp2 = Console.ReadLine();
-
-                    Console.WriteLine("Airchiet aritmetikuli moqmedeba: (+,-,*,/)");
-                    string operation = Console.ReadLine();
-
-                    //აქ ვაკეთებთ TryParse რაც ორივე რიცხვს ამოწმებს ერთდროულად.
-
-                    if (double.TryParse(inp1, out double num1) && double.TryParse(inp2, out double num2))
-                    {
-                        try
-                        {
-
-                            double result = calcFunct(num1, num2, operation);
-                            Console.ForegroundColor= ConsoleColor.Green;
-                            Console.WriteLine($"Shedegi: {result} ");
-                        Console.WriteLine("--------------------");
-                        }
-
-                        catch (Exception ex)
-                        {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"Shecdoma {ex.Message}");
-                        }
-
-
-                    } else
-                    {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Sheiyvanet ricxvebi sworad!");
-                    }
-
-                Console.ForegroundColor = ConsoleColor.Green;
-
-                Console.WriteLine("Kidev gnebavt gamotvla? (Y/N) ");
-                    string answer = Console.ReadLine();
-
-                    if(answer.ToLower() != "y")
-                    {
-                        countineOperation = false;
-                    }
-
+                    throw new ArgumentException("Sheiyvanet swori pirobiti operatori");
                 }
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Programa dasrulda!");
+
+                switch (action)
+                {
+
+                    case "+":
+                        Console.WriteLine($"Shedegi: {num1 + num2}");
+                        break;
+
+                    case "-":
+                        Console.WriteLine($"Shedegi: {num1 - num2}");
+                        break;
+
+                    case "*":
+                        Console.WriteLine($"Shedegi: {num1 * num2}");
+                        break;
+
+                    case "/":
+                        if (num2 == 0)
+                        {
+                            throw new DivideByZeroException();
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Shedegi: {num1 / num2}");
+                        }
+
+                        break;
+                }
+
             }
-           
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
+                continue;
+
+             
+            } catch (DivideByZeroException ex)
+            {
+                Console.WriteLine(ex.Message);
+                continue;
+            } 
+            
+
+            Console.WriteLine("Gnebavt kidev gamotvla? (Y/N)");
+            string countineOrNot = Console.ReadLine();
+            
+            if(  countineOrNot.ToLower() == "n")
+            {
+                calcOnOF = false;
+                Console.WriteLine("Programa dasrulda");
+            }
+
+
+
+
         }
+
+
+
 
     }
 
+        
+
+
+
+}
