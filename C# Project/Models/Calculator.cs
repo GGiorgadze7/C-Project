@@ -19,29 +19,44 @@ public class Calculator
 
         while(calcOnOF)
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("CALCULATOR");
             Console.WriteLine("-------------------------------");
+            Console.ResetColor();
 
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Sheiyvanet pirveli ricxvi:");
+            
+            Console.ResetColor();
 
             double num1;
             while(!double.TryParse(Console.ReadLine(), out num1))
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Sheiyvanet pirveli ricxvi!");
+                Console.ResetColor();
             }
-         
 
+
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Sheiyvanet meore ricxvi:");
+            Console.ResetColor();
+
             double num2;
             while (!double.TryParse(Console.ReadLine(), out num2))
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Sheiyvanet meore ricxvi!");
+                Console.ResetColor();
             }
 
 
             try
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Chaweret Pirobiti operatori: (+, -, *, /)");
+                Console.ResetColor();
+
                 string action = Console.ReadLine();
                 if (action != "+" && action != "-" && action != "*" && action != "/")
                 {
@@ -52,15 +67,22 @@ public class Calculator
                 {
 
                     case "+":
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine($"Shedegi: {num1 + num2}");
+                        Console.ResetColor();
+                        
                         break;
 
                     case "-":
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine($"Shedegi: {num1 - num2}");
+                        Console.ResetColor();
                         break;
 
                     case "*":
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine($"Shedegi: {num1 * num2}");
+                        Console.ResetColor();
                         break;
 
                     case "/":
@@ -70,33 +92,51 @@ public class Calculator
                         }
                         else
                         {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.WriteLine($"Shedegi: {num1 / num2}");
+                            Console.ResetColor();
                         }
 
                         break;
+                       
+
+
                 }
 
             }
             catch (ArgumentException ex)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(ex.Message);
+                Console.ResetColor();
                 continue;
 
-             
+
             } catch (DivideByZeroException ex)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(ex.Message);
+                Console.ResetColor();
                 continue;
-            } 
+            }
             
 
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Gnebavt kidev gamotvla? (Y/N)");
+            Console.ResetColor();
+
             string countineOrNot = Console.ReadLine();
-            
+
             if(  countineOrNot.ToLower() == "n")
             {
                 calcOnOF = false;
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Programa dasrulda");
+                Console.ResetColor();
+                
+            } else
+            {
+                Console.Clear();
             }
 
 

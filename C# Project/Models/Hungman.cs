@@ -16,6 +16,82 @@ public class Hungman
 {
     private readonly string[] words = { "akademia", "kompiuteri", "leqcia", "saqartvelo", "funqcia", "memkvidreoba", "gamocana" };
 
+    private string[] hangmanStages = new string[]
+    {
+        // პირველი ეტაპი
+        """
+         --------
+         |      |
+         |
+         |
+         |
+         |
+        ---------
+        """,
+        // მეორე ეტაპი თავი
+        
+        """
+        
+         --------
+         |      |
+         |      O
+         |
+         |
+         |
+        ---------
+        """,
+        // მესამე ეტაპი ყელი
+        """
+         --------
+         |      |
+         |      O
+         |      |
+         |
+         |
+        ---------
+        """,
+        // მეოთხე ეტაპი
+        """
+         --------
+         |      |
+         |      O
+         |     /|
+         |      
+         |        
+        ---------
+        """,
+        // მეხუთე ეტაპი
+        """
+         --------
+         |      |
+         |      O
+         |     /|\
+         |
+         |
+        ---------
+        """,
+        // მეექვსე ეტაპი
+        """
+         --------
+         |      |
+         |      O
+         |     /|\
+         |      |
+         |     /
+        ---------
+        """,
+        // მეშვიდე ეტაპი " მოკვდა "
+        """
+         --------
+         |      |
+         |      O
+         |     /|\
+         |      |
+         |     / \
+        ---------
+        """
+    };
+
     public void GuessPlay()
     {
         Random random = new Random();
@@ -34,6 +110,7 @@ public class Hungman
         while (wrongAttempts < maxAttempts && new string(guessedWord) != wordToGuess)
         {
             Console.WriteLine();
+            Console.WriteLine(hangmanStages[wrongAttempts]);
             Console.WriteLine("sityva: " + string.Join(" ", guessedWord));
             Console.WriteLine($"araswori mcdelobebis raodenoba: {wrongAttempts}/{maxAttempts}");
             Console.WriteLine("nacadi asoebi: " + string.Join(", ", guessedLetters));
@@ -41,7 +118,7 @@ public class Hungman
 
             string input = Console.ReadLine();
 
-           
+
             if (string.IsNullOrEmpty(input) || input.Length != 1 || !char.IsLetter(input[0]))
             {
                 Console.WriteLine("gtxovt sheiyvanot mxolod erti aso.");
@@ -50,7 +127,7 @@ public class Hungman
 
             char guess = char.ToLower(input[0]);
 
-           
+
             if (guessedLetters.Contains(guess))
             {
                 Console.WriteLine("es aso ukve gamoiyenet.");
@@ -61,7 +138,7 @@ public class Hungman
 
             if (wordToGuess.Contains(guess))
             {
-                
+
                 for (int i = 0; i < wordToGuess.Length; i++)
                 {
                     if (wordToGuess[i] == guess)
@@ -77,6 +154,7 @@ public class Hungman
         }
 
         Console.WriteLine();
+        Console.WriteLine(hangmanStages[wrongAttempts]);
         if (new string(guessedWord) == wordToGuess)
             Console.WriteLine($"Gilocavt tqven gamoicanit sityva: {wordToGuess}");
         else
