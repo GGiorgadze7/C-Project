@@ -1,5 +1,9 @@
 ﻿using C__Project.Models;
 
+// ქართული და რუსული ტექსტის მხარდაჭერა პირველივე შეყვანამდე.
+Console.InputEncoding = System.Text.Encoding.UTF8;
+Console.OutputEncoding = System.Text.Encoding.UTF8;
+
 Console.WriteLine("Airchiet programa:");
 Console.WriteLine("1 - Calculator");
 Console.WriteLine("2 - GuessNumber");
@@ -27,6 +31,11 @@ switch (choice)
         hangman.GuessPlay();
         return;
 
+
+    // მენიუს მეოთხე პუნქტი თარჯიმანს უშვებს.
+    case "4":
+        Translator.Run();
+        return;
 
     case "5":
         ATM atm = new ATM();
