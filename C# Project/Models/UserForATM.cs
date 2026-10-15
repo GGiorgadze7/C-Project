@@ -1,28 +1,30 @@
-﻿//3.5 ბანკომატი
-//ბანკომატის აპლიკაცია საშუალებას აძლევს მომხმარებელს განახორციელოს ბანკომატის  
-//ძირითადი ოპერაციების სიმულაცია. მომხმარებელს შეუძლია შეასრულოს ისეთი ქმედებები,
-//როგორიცაა: – რეგისტრაცია,  – დალოგინება,  – ბალანსის შემოწმება,  – თანხის შეტანა და  – თანხის გატანა,  – მომხმარებლის მონაცემები ინახება ტექსტურ ფაილში მომხმარებლის ანგარიშის 
-//ინფორმაციის შესანარჩუნებლად. 
-//სტუდენტს შეუძლია უფრო გაართულოს ფუნქციონალი შემდეგი პირობის შესრულებბის 
-//გზით:  
-//– სესხის მოთხოვნა და – მოთხოვნის დადასტურება ადმინის მხრიდან (იგულისხება, რომ ამ შემთხვევაში 
-//რეგისტრაციის დროს მომხმარებელს აქვს 2 როლი: client, admin),
-
-
-using System;
-using System.Collections.Generic;
-using System.Text;
 using C__Project.Models.Enum;
 
-namespace C__Project.Models
+namespace C__Project.Models;
+
+// ეს კლასი ერთი მომხმარებლის ანგარიშის მონაცემებს აერთიანებს.
+public class UserForATM
 {
-    public class UserForATM
-    {
-        public string Name { get; set; }
-        public  string Lastname { get; set; }
-        public Guid Id { get; set; }
+    // უნიკალური ნომერი მომხმარებელს სესხის ჩანაწერთან აკავშირებს.
+    public Guid Id { get; set; } = Guid.NewGuid();
 
-        //public UserRoleATM  MyProperty { get; set; }
+    // პირადი მონაცემები რეგისტრაციისას ივსება.
+    public string Name { get; set; } = "";
+    public string Lastname { get; set; } = "";
 
-    }
+    // ეს ორი ველი ანგარიშში შესვლისთვის გამოიყენება.
+    public string Username { get; set; } = "";
+    public string Password { get; set; } = "";
+
+    // როლი განსაზღვრავს, რომელი მენიუ გაიხსნება შესვლის შემდეგ.
+    public UserRoleATM Role { get; set; }
+
+    // decimal თანხის შესანახად გამოიყენება.
+    public decimal Balance { get; set; }
+
+    // მოთხოვნილი თანხა, რომელსაც ადმინის პასუხი ჯერ არ აქვს.
+    public decimal PendingLoan { get; set; }
+
+    // მომხმარებლისთვის დამტკიცებული სესხების საერთო თანხა.
+    public decimal Loan { get; set; }
 }

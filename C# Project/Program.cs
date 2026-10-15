@@ -10,7 +10,10 @@ Console.WriteLine("5 - Bankomat");
 Console.WriteLine("6 - Exit");
 
 string choice  = Console.ReadLine();
-Console.Clear();
+if (!Console.IsOutputRedirected)
+{
+    Console.Clear();
+}
 switch (choice)
 {
     case "1": Calculator.RunCalc();
@@ -24,6 +27,11 @@ switch (choice)
         hangman.GuessPlay();
         return;
 
+
+    case "5":
+        ATM atm = new ATM();
+        atm.Run();
+        return;
 
     case "6":
         Console.WriteLine("Programa Dasrulda");

@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+namespace C__Project.Models.Enum;
 
-namespace C__Project.Models.Enum
+public enum UserRoleATM
 {
-    enum  UserRoleATM
-    {
-        client,
-        admin
-
-
-    }
+    client, 
+    admin 
 }
