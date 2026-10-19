@@ -4,8 +4,8 @@ namespace C__Project.Models;
 
 public class Translator
 {
-    // ლექსიკონები კომპიუტერში, პროგრამის გვერდით მდებარე საქაღალდეში ინახება.
-    private static string folder = Path.Combine(AppContext.BaseDirectory, "Data", "Dictionaries");
+    // ლექსიკონებიც სხვა მონაცემებთან ერთად საერთო Data საქაღალდეში ინახება.
+    private static string folder = DataStorage.Folder;
     private static string englishFile = Path.Combine(folder, "georgian-english.txt");
     private static string russianFile = Path.Combine(folder, "georgian-russian.txt");
 

@@ -1,0 +1,8 @@
+﻿გამარჯობა|hello
+მადლობა|thank you
+ნახვამდის|goodbye
+კატა|cat
+სახლი|house
+დილა მშვიდობისა|good morning
+
+კარები|Door

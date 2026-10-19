@@ -10,9 +10,9 @@ public class ATM
     private List<UserForATM> users = new List<UserForATM>();
 
     // ფაილები დისკზე, პროგრამის გვერდით მდებარე Data საქაღალდეში შეიქმნება.
-    private string dataFolder = Path.Combine(AppContext.BaseDirectory, "Data");
-    private string usersFile = Path.Combine(AppContext.BaseDirectory, "Data", "users.txt");
-    private string loansFile = Path.Combine(AppContext.BaseDirectory, "Data", "loans.txt");
+    private string dataFolder = DataStorage.Folder;
+    private string usersFile = Path.Combine(DataStorage.Folder, "users.txt");
+    private string loansFile = Path.Combine(DataStorage.Folder, "loans.txt");
 
     // ტვირთავს მონაცემებს და აჩვენებს ბანკომატის საწყის მენიუს.
     public void Run()
@@ -290,7 +290,7 @@ public class ATM
                 throw new FormatException();
 
             // ძველი ვერსიის მონაცემებსაც ვკითხულობთ, რომ ანგარიშები არ დაიკარგოს.
-            string oldFile = Path.Combine(AppContext.BaseDirectory, "users.txt");
+            string oldFile = Path.Combine(DataStorage.Folder, "users-legacy.txt");
             if (File.Exists(oldFile))
             {
                 string text = File.ReadAllText(oldFile);
