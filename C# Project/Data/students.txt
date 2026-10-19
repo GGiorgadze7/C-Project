@@ -1,1 +1,4 @@
 ﻿1|giorgi|A
+3|anano|A|ananoevna|2003-07-12
+4|gela|B|gelaevi|2000-10-10
+9|kaxa|E|kaxaevi|2000-11-11

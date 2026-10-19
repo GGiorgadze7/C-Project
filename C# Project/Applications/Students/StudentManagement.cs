@@ -66,6 +66,27 @@ public class StudentManagement
             name = ReadText();
         }
 
+        Console.Write("Sheiyvanet gvari: ");
+        string lastName = ReadText();
+        while (string.IsNullOrWhiteSpace(lastName) || lastName.Contains('|'))
+        {
+            Console.Write("Gvari ar unda iyos carieli an sheicavdes | simbolos. Scadet tavidan: ");
+            lastName = ReadText();
+        }
+
+        DateOnly birthDate;
+        while (true)
+        {
+            Console.Write("Sheiyvanet dabadebis tarigi (yyyy-MM-dd): ");
+            if (DateOnly.TryParseExact(ReadText(), "yyyy-MM-dd",
+                System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out birthDate)
+                && birthDate <= DateOnly.FromDateTime(DateTime.Today))
+                break;
+
+            Console.WriteLine("Sheiyvanet swori tarigi!");
+        }
+
         int rollNumber = ReadRollNumber();
         while (FindStudent(rollNumber) != null)
         {
@@ -74,7 +95,7 @@ public class StudentManagement
         }
 
         char grade = ReadGrade();
-        Student student = new Student(name, rollNumber, grade);
+        Student student = new Student(name, lastName, birthDate, rollNumber, grade);
         students.Add(student);
         SaveStudents();
         Console.WriteLine("Studenti daemata.");
@@ -181,14 +202,16 @@ public class StudentManagement
         }
     }
 
-    // ყველა სტუდენტს წერს ტექსტურ ფაილში ფორმატით: ნომერი|სახელი|შეფასება.
+    // ახალი ფორმატი: ნომერი|სახელი|შეფასება|გვარი|დაბადების თარიღი.
     // დროებითი ფაილი იცავს ძველ მონაცემებს, თუ ჩაწერა ვერ დასრულდა.
     private void SaveStudents()
     {
         Directory.CreateDirectory(Path.GetDirectoryName(studentsFile)!);
         List<string> lines = new List<string>();
         foreach (Student student in students)
-            lines.Add($"{student.RollNumber}|{student.Name}|{student.Grade}");
+            lines.Add(student.BirthDate.HasValue
+                ? $"{student.RollNumber}|{student.FirstName}|{student.Grade}|{student.LastName}|{student.BirthDate.Value.ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture)}"
+                : $"{student.RollNumber}|{student.FirstName}|{student.Grade}");
 
         string temporaryFile = studentsFile + ".tmp";
         File.WriteAllLines(temporaryFile, lines, System.Text.Encoding.UTF8);
@@ -205,7 +228,7 @@ public class StudentManagement
         foreach (string line in File.ReadAllLines(studentsFile, System.Text.Encoding.UTF8))
         {
             string[] parts = line.Split('|');
-            if (parts.Length != 3 ||
+            if ((parts.Length != 3 && parts.Length != 5) ||
                 !int.TryParse(parts[0], out int number) || number <= 0 ||
                 string.IsNullOrWhiteSpace(parts[1]) ||
                 parts[2].Length != 1 || parts[2][0] < 'A' || parts[2][0] > 'F' ||
@@ -214,7 +237,20 @@ public class StudentManagement
                 throw new IOException("Students.txt failshi araswori monacemebia. Sheamowmet faili.");
             }
 
-            students.Add(new Student(parts[1], number, parts[2][0]));
+            if (parts.Length == 3)
+            {
+                students.Add(new Student(parts[1], number, parts[2][0]));
+                continue;
+            }
+
+            if (string.IsNullOrWhiteSpace(parts[3]) ||
+                !DateOnly.TryParseExact(parts[4], "yyyy-MM-dd",
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    System.Globalization.DateTimeStyles.None, out DateOnly birthDate) ||
+                birthDate > DateOnly.FromDateTime(DateTime.Today))
+                throw new IOException("Students.txt failshi araswori monacemebia. Sheamowmet faili.");
+
+            students.Add(new Student(parts[1], parts[3], birthDate, number, parts[2][0]));
         }
     }
 

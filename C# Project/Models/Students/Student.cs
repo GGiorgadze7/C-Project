@@ -1,22 +1,28 @@
 ﻿namespace C__Project.Models;
 
-public class Student
+public class Student : Human
 {
     // private set იცავს მონაცემებს გარედან პირდაპირი შეცვლისგან (ინკაფსულაცია).
-    public string Name { get; private set; }
     public int RollNumber { get; private set; }
     public char Grade { get; private set; }
 
     // კონსტრუქტორი ქმნის სტუდენტს და ამოწმებს მის მონაცემებს.
     public Student(string name, int rollNumber, char grade)
+        : base(name)
     {
-        if (string.IsNullOrWhiteSpace(name))
-            throw new ArgumentException("Saxeli ar unda iyos carieli.");
-
         if (rollNumber <= 0)
             throw new ArgumentException("Siis nomeri unda iyos dadebiti.");
 
-        Name = name.Trim();
+        RollNumber = rollNumber;
+        UpdateGrade(grade);
+    }
+
+    public Student(string firstName, string lastName, DateOnly birthDate, int rollNumber, char grade)
+        : base(firstName, lastName, birthDate)
+    {
+        if (rollNumber <= 0)
+            throw new ArgumentException("Siis nomeri unda iyos dadebiti.");
+
         RollNumber = rollNumber;
         UpdateGrade(grade);
     }
@@ -34,7 +40,8 @@ public class Student
     // კონსოლში აჩვენებს ერთი სტუდენტის მონაცემებს.
     public void ShowDetails()
     {
-        Console.WriteLine($"Saxeli: {Name} | Siis nomeri: {RollNumber} | Shefaseba: {Grade}");
+        string birthDate = BirthDate?.ToString("yyyy-MM-dd") ?? "Ucnobia";
+        Console.WriteLine($"Saxeli: {Name} | Dabadebis tarigi: {birthDate} | Siis nomeri: {RollNumber} | Shefaseba: {Grade}");
     }
 }
 
