@@ -166,13 +166,15 @@ public class StudentManagement
     // სიაში ეძებს შესაბამის ნომერს; თუ ვერ იპოვა, აბრუნებს null-ს.
     private Student? FindStudent(int rollNumber)
     {
-        foreach (Student student in students)
-        {
-            if (student.RollNumber == rollNumber)
-                return student;
-        }
 
-        return null;
+        return students.FirstOrDefault(s => s.RollNumber == rollNumber);
+        //foreach (Student student in students)
+        //{
+        //    if (student.RollNumber == rollNumber)
+        //        return student;
+        //}
+
+        //return null;
     }
 
     // იმეორებს შეყვანას, სანამ მომხმარებელი დადებით მთელ რიცხვს არ შეიყვანს.

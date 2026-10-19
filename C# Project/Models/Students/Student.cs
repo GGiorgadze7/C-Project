@@ -41,7 +41,7 @@ public class Student : Human
     public void ShowDetails()
     {
         string birthDate = BirthDate?.ToString("yyyy-MM-dd") ?? "Ucnobia";
-        Console.WriteLine($"Saxeli: {Name} | Dabadebis tarigi: {birthDate} | Siis nomeri: {RollNumber} | Shefaseba: {Grade}");
+        Console.WriteLine($"Id:{Id} | Saxeli: {Name} | Dabadebis tarigi: {birthDate} | Siis nomeri: {RollNumber} | Shefaseba: {Grade}");
     }
 }
 

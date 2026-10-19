@@ -2,6 +2,7 @@ namespace C__Project.Models;
 
 public class Human
 {
+    public Guid Id { get; set; } = Guid.NewGuid();
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
     public DateOnly? BirthDate { get; private set; }
