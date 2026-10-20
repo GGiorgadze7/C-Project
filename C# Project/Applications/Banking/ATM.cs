@@ -23,7 +23,7 @@ public class ATM
             LoadUsers();
             CreateAdmin();
             SaveUsers();
-            Console.WriteLine($"Monacemebis saqaghalde: {dataFolder}");
+            Console.WriteLine($"ATM");
             while (true)
             {
                 Console.WriteLine("\n1 - Registracia\n2 - Shesvla\n0 - Gasvla");

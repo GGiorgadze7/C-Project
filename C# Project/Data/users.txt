@@ -2,3 +2,5 @@
 984403ee-2ec8-40b9-8878-86cc44abfe9d|giorgi|gvelesiani|gvelesa|123456|admin|0
 605cd982-7b2a-4014-a26a-a349eb6f4c58|Admin|ATM|admin|Admin123|admin|0
 18c6fcea-c8a1-48d6-a85f-997c271e94d1|gela|barkalaia|gela|12345|client|50000
+d3c18f78-4dc8-41a1-94e7-121c4026ee7e|luka|lukadze|lukka|123456|client|20000
+e9ac3cd8-1c28-4490-af4d-609a7b10a126|giorgi|giorgadze|gio|123|client|0

@@ -11,7 +11,6 @@ public class StudentManagement
     {
         Console.WriteLine("Studentebis martvis sistema");
         
-
         try
         {
             LoadStudents();
@@ -168,13 +167,7 @@ public class StudentManagement
     {
 
         return students.FirstOrDefault(s => s.RollNumber == rollNumber);
-        //foreach (Student student in students)
-        //{
-        //    if (student.RollNumber == rollNumber)
-        //        return student;
-        //}
-
-        //return null;
+        
     }
 
     // იმეორებს შეყვანას, სანამ მომხმარებელი დადებით მთელ რიცხვს არ შეიყვანს.
@@ -204,7 +197,7 @@ public class StudentManagement
         }
     }
 
-    // ახალი ფორმატი: ნომერი|სახელი|შეფასება|გვარი|დაბადების თარიღი.
+    
     // დროებითი ფაილი იცავს ძველ მონაცემებს, თუ ჩაწერა ვერ დასრულდა.
     private void SaveStudents()
     {
